@@ -22,42 +22,66 @@ public class playerScript : MonoBehaviour
     {
         float xVelocity = 0;
         float yVelocity = 0;
-        float speed = 17;
+        float speed = 5;
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey("a"))
         {
-            anim.SetBool("walk-left", true);
+            
             xVelocity = -speed;
-        }
-        else
-        {
-            anim.SetBool("walk-left", false);
+            rb.velocity = new Vector2(xVelocity, 0);
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey("d"))
+        {
+            
+            xVelocity = speed;
+            rb.velocity = new Vector2(xVelocity, 0);
+        }
+
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey("w"))
+        {
+
+            yVelocity = speed;
+            rb.velocity = new Vector2(0, yVelocity);
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey("s"))
+        {
+
+            yVelocity = -speed;
+            rb.velocity = new Vector2(0, yVelocity);
+        }
+
+        if (xVelocity>0) //Moving Right
         {
             anim.SetBool("walk-right", true);
-            xVelocity = speed;
         }
         else
         {
             anim.SetBool("walk-right", false);
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (xVelocity<0) //Moving Left
+        {
+            anim.SetBool("walk-left", true);
+        }
+        else
+        {
+            anim.SetBool("walk-left", false);
+        }
+
+        if(yVelocity>0) //Moving Up
         {
             anim.SetBool("walk-up", true);
-            yVelocity = speed;
         }
         else
         {
             anim.SetBool("walk-up", false);
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if(yVelocity<0) //Moving Down
         {
             anim.SetBool("walk-down", true);
-            yVelocity = -speed;
         }
         else
         {
